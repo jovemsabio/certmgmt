@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script>
+        function sendForm() {
+            form = document.getElementById("form")
+            arq = document.querySelector("#arq")
+            certPem = document.querySelector("#cert-pem")
+            if (arq.value) {
+                for (f of arq.files) {
+                    console.log(f);
+                }
+                form.submit(function (e) {
+                    // event handler
+                    console.log(e);
+                });
+            } else if (certPem != "") {
+                console.log(certPem.value);
+                form.submit((e) => {
+                            return true;
+                });
+            } else {
+                console.log("Nada a ser enviado");
+            }
+        }
+    </script>
+</head>
+<body>
+    <form id='form' action="add-cert.php" method="post" enctype="multipart/form-data">
+      <div>
+          <div>
+          <!-- <div> -->
+          <!--     <input type="radio" name="pem-origin" id="pem-file" value="file"> -->
+          <!--     <label for="pem-file">PEM File</label> -->
+          <!--     <input type="radio" name="pem-origin" id="pem-text" value="text" checked> -->
+          <!--     <label for="pem-text">PEM text</label> -->
+          <!-- </div> -->
+              <label for="cert">Select a file:</label>
+          </div>
+          <div>
+              <label for="arq">PEM file: </label>
+              <input multiple type="file" id="arq" name="arq[]">
+          </div>
+          <!-- <div> -->
+          <!--     <label for="cert-pem">PEM Text: </label> -->
+          <!--     <div> -->
+          <!--       <textarea name="cert-pem" id="cert-pem" rows=20 cols=60></textarea> -->
+          <!--     </div> -->
+          <!-- </div> -->
+      </div>
+      <!-- <input type="submit" name="submit" id="submit" value="Enviar" /> -->
+      <button type="submit">Enviar</button>
+    </form>
+    <!-- <button onClick="sendForm()">Send</button> -->
+
+    <script src="js/axios.min.js" charset="utf-8"></script>
+</body>
+</html>
